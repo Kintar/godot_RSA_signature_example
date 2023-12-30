@@ -1,0 +1,85 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnnf2g3ub5ulw"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_2dcew"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2dcew")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="BtnGenerate" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Generate KeyPair"
+
+[node name="BtnUnload" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Unload Keys"
+
+[node name="BtnLoadPrivate" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Load Private Key"
+
+[node name="BtnLoadPublic" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Load Public Key"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BtnSign" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Sign Message"
+
+[node name="BtnVerify" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Verify Signature"
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BtnExit" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Exit
+"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Message" type="TextEdit" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Enter Plaintext Message Here"
+
+[node name="Signature" type="TextEdit" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+placeholder_text = "Enter/Generate Signature"
+wrap_mode = 1
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/BtnGenerate" to="." method="_on_btn_generate_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/BtnUnload" to="." method="_on_btn_unload_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/BtnLoadPrivate" to="." method="_on_btn_load_private_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/BtnLoadPublic" to="." method="_on_btn_load_public_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/BtnSign" to="." method="_on_btn_sign_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/BtnVerify" to="." method="_on_btn_verify_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/BtnExit" to="." method="_on_btn_exit_pressed"]
