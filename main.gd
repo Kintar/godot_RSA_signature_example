@@ -18,6 +18,9 @@ func _on_btn_generate_pressed() -> void:
 		msg.text = "Failed to save private key file. Error %s" % err
 		return
 	
+	# The second parameter to CryptoKey.save indicates it should only save the
+	# public portion of the key.  This can be verified by reading the resulting
+	# output file in a text editor.
 	err = cryptoKey.save(public_file, true)
 	if err != 0:
 		msg.text = "Failed to save public key file. Error %s" % err
@@ -41,9 +44,16 @@ func _on_btn_load_private_pressed() -> void:
 	else:
 		msg.text = "Successfully loaded private key"
 
+
 func _on_btn_load_public_pressed() -> void:
 	privateKey = null
 	publicKey = CryptoKey.new()
+	
+	# As with the call to CryptoKey.save when we generate the keypair, the second
+	# argument here being set to true indicates that we are only expecting to load
+	# the PUBLIC portion of the key. Attempting to load the public file without
+	# passing true in the second parameter will result in an error, since the file
+	# only contains the public key.
 	var err := publicKey.load(public_file, true)
 	if err != 0:
 		msg.text = "Failed to load public key. Error %s. Try generating a new pair." % err
@@ -61,6 +71,9 @@ func _on_btn_sign_pressed() -> void:
 	sig.text = signature.hex_encode()
 
 
+# get_message_digest implements SHA256 hashing on a variable-sized text buffer.
+# This is a required step in order to sign or verify using RSA. For a brief 
+# overview of why, see https://crypto.stackexchange.com/questions/12768/why-hash-the-message-before-signing-it-with-rsa
 func get_message_digest() -> PackedByteArray:
 	var clearText := msg.text
 	if clearText.length() == 0 or clearText == null:
