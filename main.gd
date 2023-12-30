@@ -63,7 +63,7 @@ func _on_btn_load_public_pressed() -> void:
 
 func _on_btn_sign_pressed() -> void:
 	if privateKey == null:
-		sig.text = "No private key loaded. Please generate and load public key before verifying."
+		sig.text = "No private key loaded. Please generate and load private key before signing."
 		return
 	
 	var digest := get_message_digest()
@@ -105,7 +105,7 @@ func get_message_digest() -> PackedByteArray:
 
 func _on_btn_verify_pressed() -> void:
 	if publicKey == null:
-		sig.text = "No public key loaded. Please generate and load private key before signing. "
+		sig.text = "No public key loaded. Please generate and load public key before verifying."
 		return
 
 	var clearText := msg.text
